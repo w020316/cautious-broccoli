@@ -2,7 +2,7 @@
 
 > **适用场景**：你有一个模糊的想法或完全没有方向，需要 AI 引导你从零探索到产品交付
 > **兼容工具**：Cursor / Windsurf / Trae / GitHub Copilot / Claude Code / 任何支持 System Prompt 的 AI 编程工具
-> **版本**：v1.0 | **更新日期**：2026-06-16
+> **版本**：v2.0 | **更新日期**：2026-06-16
 
 ---
 
@@ -64,6 +64,46 @@ specs/
 - 引用已有文档时只写路径，不重复内容
 - 每次只处理一个任务，完成后再处理下一个
 - 提问时每次只问1-2个问题，避免信息过载
+
+## API 缓存命中率优化
+
+- **静态内容前置**：System Prompt中，核心身份→开发规范→项目上下文→当前任务，按稳定性从高到低排列
+- **统一Prompt模板**：项目名+技术栈+规范占80%+，只有阶段和任务变化，缓存命中率极高
+- **文档引用代替复制**：引用 specs/ 路径+关键摘要，不粘贴全文
+- **各平台缓存**：Anthropic前缀缓存-90%费用 / OpenAI前缀缓存-50% / Gemini上下文缓存-75%
+
+## Token 消耗最小化
+
+- **精准指令**：说清楚要什么，不说废话（节省30-50%）
+- **结构化输出**：用表格/列表代替段落（节省20-40%）
+- **增量变更**：只输出变更的函数/组件，标注文件路径（节省50-80%）
+- **上下文管理**：按需加载文件，文档摘要代替全文，上下文过长开新窗口（节省30-60%）
+- **对话压缩**：定期总结进展保存到 specs/进度.md，开新窗口继续
+
+## 跨平台配置文件
+
+| 平台 | 配置文件 |
+|------|---------|
+| Cursor | `.cursorrules` |
+| Windsurf | `.windsurfrules` |
+| Trae | `.trae/rules/project_rules.md` |
+| Claude Code | `CLAUDE.md` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Cline | `.clinerules` |
+
+## UI 组件库速查
+
+| 项目类型 | React推荐 | Vue推荐 |
+|---------|----------|--------|
+| 管理后台 | Ant Design 5 / shadcn/ui | Element Plus |
+| 移动端H5 | Ant Design Mobile | Vant 4 |
+| 小程序 | - | uView Plus |
+| SaaS/产品 | shadcn/ui + Tailwind | Naive UI |
+| 创意/营销 | shadcn/ui + ReactBits + Framer Motion | - |
+| 快速MVP | MUI / Chakra UI | PrimeVue |
+| 自定义设计系统 | Radix UI + Tailwind | Headless UI + Tailwind |
+
+创意动效组件库：ReactBits(38.9K★) / Aceternity UI(18K★) / Magic UI(15K★)
 ```
 
 ---
@@ -523,15 +563,16 @@ specs/
 
 ## 技术栈自动选型规则
 
-| 项目特征 | 推荐技术栈 | 理由 |
-|---------|-----------|------|
-| Web+SEO | Next.js + TypeScript + Tailwind CSS | SSR/SSG + 生态成熟 |
-| Web无SEO | React + Vite + TypeScript + Tailwind CSS | 开发体验好 |
-| 小程序 | uni-app(Vue3) + uView Plus | 一套代码多端 |
-| 管理后台 | React + Ant Design Pro | 开箱即用 |
-| 移动APP | React Native + Expo | JS生态 + 跨平台 |
-| 快速MVP | Next.js + Supabase + Vercel | 零运维 + 免费部署 |
-| 全栈SaaS | Next.js + tRPC + Prisma + Supabase | 类型安全 + 全栈 |
+| 项目特征 | 推荐技术栈 | 理由 | UI组件库 |
+|---------|-----------|------|---------|
+| Web+SEO | Next.js + TypeScript + Tailwind CSS | SSR/SSG + 生态成熟 | shadcn/ui |
+| Web无SEO | React + Vite + TypeScript + Tailwind CSS | 开发体验好 | shadcn/ui / Ant Design 5 |
+| 小程序 | uni-app(Vue3) + uView Plus | 一套代码多端 | uView Plus |
+| 管理后台 | React + Ant Design Pro | 开箱即用 | Ant Design 5 / Element Plus |
+| 移动APP | React Native + Expo | JS生态 + 跨平台 | - |
+| 快速MVP | Next.js + Supabase + Vercel | 零运维 + 免费部署 | shadcn/ui + Tailwind |
+| 全栈SaaS | Next.js + tRPC + Prisma + Supabase | 类型安全 + 全栈 | shadcn/ui |
+| 创意/营销 | React + Tailwind + Framer Motion | 视觉冲击力 | ReactBits / Aceternity UI / Magic UI |
 
 ## 免费资源推荐
 
