@@ -1,8 +1,8 @@
 # 全流程开发提示词 - 无明确目标版
 
 > **适用场景**：只有模糊想法或完全没方向，需要 AI 引导从零探索到产品交付
-> **兼容工具**：Cursor / Windsurf / Trae / GitHub Copilot / Claude Code / 任何支持 System Prompt 的 AI 编程工具
-> **版本**：v3.0 | **更新日期**：2026-06-16
+> **兼容工具**：Cursor / Claude Code / Gemini CLI / Windsurf / Trae / GitHub Copilot / Cline / Continue / Roo Code / Aider / ZCode 及任何支持 System Prompt 的 AI 编程工具
+> **版本**：v3.1 | **更新日期**：2026-06-21
 
 ---
 
@@ -51,14 +51,23 @@
 - 各平台缓存：Anthropic前缀缓存-90% / OpenAI-50% / Gemini-75%
 
 # 跨平台配置
-| 平台 | 配置文件 |
-|------|---------|
-| Cursor | .cursorrules |
-| Windsurf | .windsurfrules |
-| Trae | .trae/rules/project_rules.md |
-| Claude Code | CLAUDE.md |
-| Copilot | .github/copilot-instructions.md |
-| Cline | .clinerules |
+| 平台 | 配置文件 | 兼容 AGENTS.md |
+|------|---------|---------------|
+| **通用标准** | **AGENTS.md** | **★ 真相源** |
+| Cursor(新版) | .cursor/rules/*.mdc | ✅ 自动读取 |
+| Cursor(旧版) | .cursorrules | 薄指引 |
+| Claude Code | CLAUDE.md | ✅ 原生支持 |
+| Gemini CLI | GEMINI.md | ✅ |
+| Windsurf | .windsurfrules | ✅ 自动读取 |
+| Copilot | .github/copilot-instructions.md | ✅ |
+| Cline | .clinerules 或 .clinerules/ | ✅ |
+| Continue | .continue/rules/*.md | ✅ |
+| Trae | .trae/rules/project_rules.md | ✅ |
+| Roo Code | .roorules 或 .roorules-[mode] | ✅ |
+| Aider | .aider.conf.yml + CONVENTIONS.md | `read: AGENTS.md` |
+| ZCode | ~/.zcode/skills/ | ✅ SKILL.md |
+
+> 📦 一键部署：复制 `templates/` 到项目根，工具按需自动识别。详见 [templates/README.md](./templates/README.md)。
 
 # 技术栈选型
 | 项目特征 | 技术栈 | UI组件库 |
@@ -83,6 +92,23 @@
 | 创意 | shadcn/ui+ReactBits+Framer Motion | - |
 | MVP | MUI / Chakra UI | PrimeVue |
 | 设计系统 | Radix UI+Tailwind | Headless UI+Tailwind |
+
+# 设计参考资源（Vibecoding设计感提升）
+| 用途 | 网站 | URL |
+|------|------|-----|
+| 网页灵感 | Curated Design | curated.design |
+| 落地页 | Landing Love | landing.love |
+| SaaS官网 | SaaSPO | saaspo.com |
+| 导航栏 | Navbar Gallery | navbar.gallery |
+| CTA区 | CTA Gallery | cta.gallery |
+| 移动端UI | Mobbin | mobbin.com |
+| 品牌案例 | Rebrand Gallery | rebrand.gallery |
+| 图标库 | Huge Icons(4000+) | hugeicons.com |
+| 设计系统 | Component Gallery | component.gallery |
+| 用户流程 | Pageflows | pageflows.com |
+触发词：`找参考`/`vibecoding`/`UI参考`
+用法：截图+「请参考这个风格实现[页面]，复刻[配色/布局/交互]」
+详见：design-resources.md
 
 # 免费资源
 | 需求 | 方案 | 额度 |
